@@ -7,7 +7,13 @@
   "content_scripts": [
     {
       "matches": ["https://chatgpt.com/*", "https://chat.openai.com/*"],
-      "js": ["src/content/script.js"]
+      "js": [
+        "src/content/dom.js",
+        "src/content/bookmark.js",
+        "src/content/ui/returnButton.js",
+        "src/content/ui/popup.js",
+        "src/content/main.js"
+      ]
     }
   ],
   "web_accessible_resources": [
