@@ -2,15 +2,15 @@
  * DOM utilities for interacting with ChatGPT's DOM structure
  */
 
-window.SideQuest = window.SideQuest || {};
+window.ChatMark = window.ChatMark || {};
 
-window.SideQuest.getMessageIdfromEvent = function(event) {
+window.ChatMark.getMessageIdfromEvent = function(event) {
   const messageNode = event.target.closest('[data-message-id]');
   if (!messageNode) return null;
   return messageNode.getAttribute('data-message-id');
 };
 
-window.SideQuest.getDataRangeFromSelection = function() {
+window.ChatMark.getDataRangeFromSelection = function() {
   const selection = window.getSelection();
   if (!selection.rangeCount) {
     return { dataStart: null, dataEnd: null };
@@ -33,13 +33,13 @@ window.SideQuest.getDataRangeFromSelection = function() {
   return { dataStart: null, dataEnd: null };
 };
 
-window.SideQuest.getSessionId = function() {
+window.ChatMark.getSessionId = function() {
   const url = window.location.href;
   const match = url.match(/\/c\/([^\/\?#]+)/);
   return match ? match[1] : null;
 };
 
-window.SideQuest.returnToBookmark = function(bookmark) {
+window.ChatMark.returnToBookmark = function(bookmark) {
   let target = null;
   let messageRoot = null;
 
@@ -60,6 +60,6 @@ if (bookmark.messageId) {
   } else if (messageRoot) {
     messageRoot.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
-  window.SideQuest.removeReturnButton();
-  window.SideQuest.removeBookmark(bookmark.sessionId);
+  window.ChatMark.removeReturnButton();
+  window.ChatMark.removeBookmark(bookmark.sessionId);
 };

@@ -2,10 +2,10 @@
  * Inline Bookmark popup
  */
 
-window.SideQuest = window.SideQuest || {};
+window.ChatMark = window.ChatMark || {};
 
-window.SideQuest.showBookmarkPopup = function(text,event) { 
-  const existingPopup = document.getElementById('sidequest-bookmark-popup');
+window.ChatMark.showBookmarkPopup = function(text,event) { 
+  const existingPopup = document.getElementById('chatmark-bookmark-popup');
   if (existingPopup) {
     existingPopup.remove();
   }
@@ -13,15 +13,18 @@ window.SideQuest.showBookmarkPopup = function(text,event) {
     'button.btn.relative.btn-secondary.shadow-long.flex.rounded-xl'
   );
   const askGptBtn = [...buttons].find(btn => {
-    return btn.querySelector('span')?.classList.contains('flex')
-        && btn.querySelector('span')?.classList.contains('items-center');
+    return [...btn.querySelectorAll("span")].some(span =>
+      span.classList.contains("flex") &&
+      span.classList.contains("items-center")
+    );
   });
+
 
   if (!askGptBtn) return;
 
   const rect = askGptBtn.getBoundingClientRect();
   const popup = document.createElement("div");
-  popup.id = "sidequest-bookmark-popup";
+  popup.id = "chatmark-bookmark-popup";
 
   popup.innerHTML = `
     <div style="display: flex; align-items:center; gap: 6px;">
@@ -48,26 +51,22 @@ window.SideQuest.showBookmarkPopup = function(text,event) {
   transition: opacity .15s ease;
 `;
 
-  const state = window.SideQuest.bookmarkState;
+  const state = window.ChatMark.bookmarkState;
   state.selectedBookmarkText = text;
-  state.selectedMessageId = window.SideQuest.getMessageIdfromEvent(event);
+  state.selectedMessageId = window.ChatMark.getMessageIdfromEvent(event);
 
-  const dataRange = window.SideQuest.getDataRangeFromSelection();
+  const dataRange = window.ChatMark.getDataRangeFromSelection();
   state.selectedDataStart = dataRange.dataStart;
   state.selectedDataEnd = dataRange.dataEnd;
-
-  //팝업을 해당 컴포넌트 옆에 붙이기
-
-
   popup.addEventListener('click', () => {
-    const bookmarkRecord = window.SideQuest.createBookmarkRecord(
+    const bookmarkRecord = window.ChatMark.createBookmarkRecord(
       state.selectedBookmarkText,
       state.selectedMessageId,
       state.selectedDataStart,
       state.selectedDataEnd
     );
-    window.SideQuest.saveBookmark(window.SideQuest.getSessionId(), bookmarkRecord);
-    window.SideQuest.createReturnButton(bookmarkRecord);
+    window.ChatMark.saveBookmark(window.ChatMark.getSessionId(), bookmarkRecord);
+    window.ChatMark.createReturnButton(bookmarkRecord);
     popup.remove();
   });
   document.body.append(popup)
@@ -81,7 +80,4 @@ window.SideQuest.showBookmarkPopup = function(text,event) {
     }
   }
   setTimeout(() => document.addEventListener("click", close), 80);
-
-
-
 };

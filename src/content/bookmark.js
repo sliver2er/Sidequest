@@ -2,17 +2,17 @@
  * Bookmark creation and state management
  */
 
-window.SideQuest = window.SideQuest || {};
+window.ChatMark = window.ChatMark || {};
 
-window.SideQuest.bookmarkState = {
+window.ChatMark.bookmarkState = {
   selectedBookmarkText: '',
   selectedMessageId: null,
   selectedDataStart: null,
   selectedDataEnd: null
 };
 
-window.SideQuest.createBookmarkRecord = function(text, messageId, dataStart, dataEnd, parentId = null) {
-  const sessionId = window.SideQuest.getSessionId();
+window.ChatMark.createBookmarkRecord = function(text, messageId, dataStart, dataEnd, parentId = null) {
+  const sessionId = window.ChatMark.getSessionId();
 
   return {
     id: Date.now().toString() + Math.random().toString(36).substring(2, 11),

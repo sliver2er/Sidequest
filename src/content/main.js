@@ -30,7 +30,7 @@
           target = target.parentElement;
         }
         const event = { target };
-        window.SideQuest.showBookmarkPopup(text, event);
+        window.ChatMark.showBookmarkPopup(text, event);
         return;
       }
     }
@@ -44,26 +44,26 @@
   function handleDoubleClick(e) {
     const text = window.getSelection().toString().trim();
     if (!text) return;
-    window.SideQuest.showBookmarkPopup(text, e);
+    window.ChatMark.showBookmarkPopup(text, e);
   }
 
   function loadSessionBookmark(sessionId) {
     if (!sessionId) {
-      window.SideQuest.removeReturnButton();
+      window.ChatMark.removeReturnButton();
       return;
     }
 
-    const bookmark = window.SideQuest.loadBookmark(sessionId);
+    const bookmark = window.ChatMark.loadBookmark(sessionId);
     if (bookmark) {
-      window.SideQuest.removeReturnButton();
-      window.SideQuest.createReturnButton(bookmark);
+      window.ChatMark.removeReturnButton();
+      window.ChatMark.createReturnButton(bookmark);
     } else {
-      window.SideQuest.removeReturnButton();
+      window.ChatMark.removeReturnButton();
     }
   }
 
   function handleSessionChange() {
-    const newSessionId = window.SideQuest.getSessionId();
+    const newSessionId = window.ChatMark.getSessionId();
 
     if (newSessionId !== currentSessionId) {
       console.log('Session changed:', currentSessionId, '->', newSessionId);
@@ -75,7 +75,7 @@
   function init() {
     document.addEventListener('dblclick', handleDoubleClick);
 
-    currentSessionId = window.SideQuest.getSessionId();
+    currentSessionId = window.ChatMark.getSessionId();
     loadSessionBookmark(currentSessionId);
 
     setInterval(handleSessionChange, 500);

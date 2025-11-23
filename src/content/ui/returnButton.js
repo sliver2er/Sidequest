@@ -2,13 +2,13 @@
  * Floating return button with tooltip
  */
 
-window.SideQuest = window.SideQuest || {};
+window.ChatMark = window.ChatMark || {};
 
-window.SideQuest.createReturnButton = function(bookmarkRecord) {
-  window.SideQuest.removeReturnButton();
+window.ChatMark.createReturnButton = function(bookmarkRecord) {
+  window.ChatMark.removeReturnButton();
 
   const btn = document.createElement('div');
-  btn.id = 'sidequest-return-btn';
+  btn.id = 'chatmark-return-btn';
 
   btn.innerHTML = `
     <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +37,7 @@ window.SideQuest.createReturnButton = function(bookmarkRecord) {
   `;
 
   const tooltip = document.createElement('div');
-  tooltip.id = 'sidequest-tooltip';
+  tooltip.id = 'chatmark-tooltip';
   const truncatedText = bookmarkRecord.text.length > 50
     ? bookmarkRecord.text.substring(0, 50) + '...'
     : bookmarkRecord.text;
@@ -77,16 +77,16 @@ window.SideQuest.createReturnButton = function(bookmarkRecord) {
   });
 
   btn.addEventListener('click', () => {
-    window.SideQuest.returnToBookmark(bookmarkRecord);
+    window.ChatMark.returnToBookmark(bookmarkRecord);
   });
 
   document.body.appendChild(btn);
   document.body.appendChild(tooltip);
 };
 
-window.SideQuest.removeReturnButton = function() {
-  const btn = document.getElementById('sidequest-return-btn');
-  const tooltip = document.getElementById('sidequest-tooltip');
+window.ChatMark.removeReturnButton = function() {
+  const btn = document.getElementById('chatmark-return-btn');
+  const tooltip = document.getElementById('chatmark-tooltip');
   if (btn) btn.remove();
   if (tooltip) tooltip.remove();
 };

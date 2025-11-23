@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "SideQuest",
+  "name": "ChatMark",
   "version": "0.1.0",
   "description": "LLM 대화 중 모르는 개념을 사이드 퀘스트처럼 북마크를 지정해서 물어보고, 해결한 다음 북마크를 클릭해서 원래 위치로 복귀하는 브라우저 도구.",
   "permissions": ["storage", "activeTab", "sidePanel"],
